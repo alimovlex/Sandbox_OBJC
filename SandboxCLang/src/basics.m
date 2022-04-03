@@ -10,6 +10,7 @@
 */
 #import "basics.h"
 @implementation BinClass
+
 - (void) arrayTest
 {
 srand((unsigned)time(NULL));
@@ -22,9 +23,9 @@ int a[2];
    for ( j = 0; j < 2; j++)
    {
       n[i][j] = rand()%10;    
-      NSLog(@"a[%d][%d] = %d\t", i,j, n[i][j] );
+      ALog(@"a[%d][%d] = %d\t", i,j, n[i][j] );
     }
-   NSLog(@"Element[%d] = %d\n", i, a[i] );
+   ALog(@"Element[%d] = %d\n", i, a[i] );
    }
 }
 
@@ -36,19 +37,19 @@ int a[2];
    int  len ;
    /* uppercase string */
    str3 = [str2 uppercaseString];
-   NSLog(@"Uppercase String :  %@\n", str3 );
+   ALog(@"Uppercase String :  %@\n", str3 );
 
    /* concatenates str1 and str2 */
    str3 = [str1 stringByAppendingFormat:@"World"];
-   NSLog(@"Concatenated string:   %@\n", str3 );
+   ALog(@"Concatenated string:   %@\n", str3 );
 
    /* total length of str3 after concatenation */
    len = [str3 length];
-   NSLog(@"Length of Str3 :  %d\n", len );
+   ALog(@"Length of Str3 :  %d\n", len );
 
    /* InitWithFormat */
    str3 = [[NSString alloc] initWithFormat:@"%@ %@",str1,str2];	
-   NSLog(@"Using initWithFormat:   %@\n", str3 );
+   ALog(@"Using initWithFormat:   %@\n", str3 );
    
 }
 @end

@@ -16,7 +16,7 @@
 
 - (void) print
 {
-    NSLog(@"Complex number: %g + %gi", real, imaginary);
+    ALog(@"Complex number: %g + %gi", real, imaginary);
 }
 
 - (void) setReal:(double) r setImaginary:(double) i //the synthesize generated methods.
@@ -43,9 +43,9 @@ void complexNumbersTest()
             [comp setReal: 5.3 setImaginary: 7];
             [comp2 setReal: 2.7 setImaginary: 4];
             [comp print];
-            NSLog(@"+");
+            ALog(@"+");
             [comp2 print];
-            NSLog(@"=");
+            ALog(@"=");
             sum = [comp add: comp2];
             [sum print];
             [comp dealloc];

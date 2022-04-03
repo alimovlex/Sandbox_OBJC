@@ -12,7 +12,7 @@
 @implementation Shape
 - (void)printArea 
 {
-   NSLog(@"The area is %f", area);
+   ALog(@"The area is %f", area);
 }
 
 - (void)calculateArea 
@@ -35,7 +35,7 @@
 
 - (void)printArea 
 {
-   NSLog(@"The area of square is %f", area);
+   ALog(@"The area of square is %f", area);
 }
 
 @end

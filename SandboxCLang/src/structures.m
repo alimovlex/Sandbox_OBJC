@@ -47,24 +47,24 @@
    Book2.book_id = 6495700;
  
    /* print Book1 info */
-   NSLog(@"Book 1 title : %@\n", Book1.title);
-   NSLog(@"Book 1 author : %@\n", Book1.author);
-   NSLog(@"Book 1 subject : %@\n", Book1.subject);
-   NSLog(@"Book 1 book_id : %d\n", Book1.book_id);
+   ALog(@"Book 1 title : %@\n", Book1.title);
+   ALog(@"Book 1 author : %@\n", Book1.author);
+   ALog(@"Book 1 subject : %@\n", Book1.subject);
+   ALog(@"Book 1 book_id : %d\n", Book1.book_id);
 
    /* print Book2 info */
-   NSLog(@"Book 2 title : %@\n", Book2.title);
-   NSLog(@"Book 2 author : %@\n", Book2.author);
-   NSLog(@"Book 2 subject : %@\n", Book2.subject);
-   NSLog(@"Book 2 book_id : %d\n", Book2.book_id);
+   ALog(@"Book 2 title : %@\n", Book2.title);
+   ALog(@"Book 2 author : %@\n", Book2.author);
+   ALog(@"Book 2 subject : %@\n", Book2.subject);
+   ALog(@"Book 2 book_id : %d\n", Book2.book_id);
 }
 
 - (void) printBook:( struct Books) book 
 {
-   NSLog(@"Book title : %@\n", book.title);
-   NSLog(@"Book author : %@\n", book.author);
-   NSLog(@"Book subject : %@\n", book.subject);
-   NSLog(@"Book book_id : %d\n", book.book_id);
+   ALog(@"Book title : %@\n", book.title);
+   ALog(@"Book author : %@\n", book.author);
+   ALog(@"Book subject : %@\n", book.subject);
+   ALog(@"Book book_id : %d\n", book.book_id);
 }
 @end
 
@@ -76,17 +76,17 @@ void structuresTest()
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];   
     NSString *dateString = [dateFormatter stringFromDate:date];
     SampleClass *sampleClass = [[SampleClass alloc]init];
-    NSLog(@"Before swap : %d\t%d \n",x,y);
+    ALog(@"Before swap : %d\t%d \n",x,y);
     [sampleClass swap:&x andNum2:&y];
-    NSLog(@"Values after swap : %d\t%d \n",x,y);
+    ALog(@"Values after swap : %d\t%d \n",x,y);
     NSNumber *a = [NSNumber numberWithFloat:10.5];
     NSNumber *b = [NSNumber numberWithFloat:10.0];   
     NSNumber *result = [sampleClass multiplyA:a withB:b];
     NSString *resultString = [result stringValue];
-    NSLog(@"The product of multiplication of 10.0 and 10.5 is: %@",resultString);
-    NSLog(@"Current date is %@",dateString);
+    ALog(@"The product of multiplication of 10.0 and 10.5 is: %@",resultString);
+    ALog(@"Current date is %@",dateString);
     NSDate *newDate = [dateFormatter dateFromString:dateString];
-    NSLog(@"NewDate: %@",newDate);
+    ALog(@"NewDate: %@",newDate);
     [sampleClass dealloc];
     [dateFormatter dealloc];
 }
