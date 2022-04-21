@@ -13,9 +13,9 @@
 #import "structures.h"
 #import "complex_numbers.h"
 #import "polymorphism.h"
+#import "TCP_Channel.h"
 #import <dispatch/dispatch.h>
 #import <pthread.h>
-
 // ALog always displays output regardless of the DEBUG setting
 #define ALog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 
@@ -30,20 +30,12 @@ int main (int argc, const char * argv[])
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
-    if( argc == 2 )
-    {
-        ALog(@"The argument supplied is %s\n", argv[1]);
-    }
-    else if( argc > 2 )
-    {
-        ALog(@"Too many arguments supplied.\n");
-    }
-    else
-    {
-        ALog(@"One argument expected.\n");
-    }
-
     sandboxCLang();
+    TCP_Channel *tcpCommunicator  = [[TCP_Channel alloc] init];
+    if ([tcpCommunicator connectToHost:@"192.168.0.101" onPort:2020 withSSL:NO]) {
+        NSString *banner = [tcpCommunicator readLine];
+        [tcpCommunicator write: @"EHLO some.host.com\r\n"];
+    }
 
     dispatch_source_t timer = dispatch_source_create(
             DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(NSQualityOfServiceBackground, 0));
@@ -53,6 +45,7 @@ int main (int argc, const char * argv[])
                               0.5 * NSEC_PER_SEC);
     dispatch_resume(timer);
     dispatch_main();
+
 
 
     [pool drain];

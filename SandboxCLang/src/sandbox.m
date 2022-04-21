@@ -13,7 +13,7 @@
 #import "complex_numbers.h"
 #import "polymorphism.h"
 #import "structures.h"
-@implementation Sandbox;
+@implementation Sandbox
 
 @end
 
