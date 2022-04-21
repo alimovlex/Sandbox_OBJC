@@ -28,8 +28,7 @@ target_compile_options(Sandbox PRIVATE
 	-fno-strict-aliasing 
 	-fexceptions 
 	-fobjc-exceptions 
-	-D_NATIVE_OBJC_EXCEPTIONS 
-	-pthread 
+	-D_NATIVE_OBJC_EXCEPTIONS
 	-fPIC 
 	-Wall 
 	-DGSWARN 
@@ -74,7 +73,7 @@ target_compile_options(libCoreFoundation PRIVATE
 		-I/usr/local/include/GNUstep
 		-I/usr/include/GNUstep)
 
-target_link_libraries(Sandbox gnustep-base objc BlocksRuntime dispatch libCoreFoundation libSocket OpenSSL::SSL)
+target_link_libraries(Sandbox gnustep-base objc BlocksRuntime dispatch libCoreFoundation libSocket OpenSSL::SSL pthread)
 
 target_include_directories(Sandbox PRIVATE usr/include/GNUstep/)
 include_directories(SandboxCLang/inc

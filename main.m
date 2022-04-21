@@ -16,6 +16,7 @@
 #import "TCP_Channel.h"
 #import <dispatch/dispatch.h>
 #import <pthread.h>
+
 // ALog always displays output regardless of the DEBUG setting
 #define ALog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 
@@ -26,16 +27,36 @@ void timer_did_fire(void *context) {
     printf("Strawberry fields \n");
 }
 
-int main (int argc, const char * argv[])
-{
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-
-    sandboxCLang();
+void tcpConnect() {
     TCP_Channel *tcpCommunicator  = [[TCP_Channel alloc] init];
     if ([tcpCommunicator connectToHost:@"192.168.0.101" onPort:2020 withSSL:NO]) {
         NSString *banner = [tcpCommunicator readLine];
         [tcpCommunicator write: @"EHLO some.host.com\r\n"];
     }
+}
+
+int main (int argc, const char * argv[])
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    //sandboxCLang();
+
+    pthread_t t0;
+    if (pthread_create(&t0,NULL, tcpConnect  ,NULL)==-1) {
+        perror("Unable to create a thread for tcpConnect function\n");
+    } else {
+        printf("Connection initialization successful!");
+    }
+
+    /*
+    const char *greeting = "Hello";
+    void (^speak)() = ^(char *x) {
+        printf("%s %s\n", greeting, x);
+    };
+
+    speak("World");
+    */
+    dispatch_queue_t main_q = dispatch_get_main_queue();
+    dispatch_queue_global_t global_t = dispatch_get_global_queue(NSQualityOfServiceBackground, 0);
 
     dispatch_source_t timer = dispatch_source_create(
             DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(NSQualityOfServiceBackground, 0));
@@ -45,8 +66,6 @@ int main (int argc, const char * argv[])
                               0.5 * NSEC_PER_SEC);
     dispatch_resume(timer);
     dispatch_main();
-
-
 
     [pool drain];
     return 0;
